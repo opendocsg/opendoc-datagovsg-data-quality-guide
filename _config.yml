@@ -1,5 +1,9 @@
 title: Data.gov.sg Data Quality Guide
 remote_theme: opengovsg/opendoc-theme
+timezone: Asia/Singapore
+plugins:
+  - jekyll-seo-tag
+  - jekyll-coffeescript
 elastic_search:
   index: datagovsg-data-quality-guide
   doctype: bare
