@@ -1,6 +1,7 @@
 title: Data.gov.sg Data Quality Guide
 remote_theme: opengovsg/opendoc-theme
 timezone: Asia/Singapore
+environment: DEV
 plugins:
   - jekyll-seo-tag
   - jekyll-coffeescript
