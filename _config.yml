@@ -1,11 +1,9 @@
-title: OpenDoc Template
+title: Data.gov.sg Data Quality Guide
 remote_theme: opengovsg/opendoc-theme
-timezone: Asia/Singapore
 elastic_search:
-  index: template
+  index: datagovsg-data-quality-guide
   doctype: bare
-environment: DEV
 section_order:
 styling_options:
-  primary_brand_color: '#444'
+  primary_brand_color: '#113355'
   logo_path: /assets/logo.png
