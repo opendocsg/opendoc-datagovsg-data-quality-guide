@@ -1,14 +1,34 @@
 title: Data.gov.sg Data Quality Guide
-remote_theme: opengovsg/opendoc-theme
+remote_theme: opendocsg/opendoc-theme@master
 timezone: Asia/Singapore
-environment: DEV
+repository: opendocsg/opendoc-datagovsg-data-quality-guide
 plugins:
   - jekyll-seo-tag
-  - jekyll-coffeescript
-elastic_search:
-  index: datagovsg-data-quality-guide
-  doctype: bare
-section_order:
+  - jekyll-include-cache
+aseurl: ''
+server_PROD: https://search.opendoc.sg
+server_DEV: https://search-staging.opendoc.sg
+offline: false
+google_analytics: 
+
 styling_options:
   primary_brand_color: '#113355'
   logo_path: /assets/logo.png
+  opendoc_logo_path: /assets/images/logo-full.png
+  feedback_url: https://form.gov.sg/5cee3d46138e3200109244df
+
+hide_toolbar:
+  sidebar: false
+  pdf: false
+  github: true
+
+folders:
+  - name: '/'
+    title: 'Data.gov.sg Data Quality Guide'
+    subtitle: ''
+    order:
+      - 'key_principles.md'
+      - 'data_packages.md'
+      - 'structure.md'
+      - 'reserved_columns.md'
+      - 'contact.md'
