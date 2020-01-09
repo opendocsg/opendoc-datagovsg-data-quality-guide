@@ -5,7 +5,7 @@ repository: opendocsg/opendoc-datagovsg-data-quality-guide
 plugins:
   - jekyll-seo-tag
   - jekyll-include-cache
-aseurl: ''
+baseurl: ''
 server_PROD: https://search.opendoc.sg
 server_DEV: https://search-staging.opendoc.sg
 offline: false
