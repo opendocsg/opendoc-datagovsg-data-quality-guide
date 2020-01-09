@@ -25,7 +25,6 @@ hide_toolbar:
 folders:
   - name: '/'
     title: 'Data.gov.sg Data Quality Guide'
-    subtitle: ''
     order:
       - 'key_principles.md'
       - 'data_packages.md'
