@@ -1,0 +1,467 @@
+<!-- layout for print export.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./assets/images/favicon.ico">
+    <link rel="stylesheet" href="./assets/styles/normalize.css">
+    <link rel="stylesheet" href="./assets/styles/main.css">
+  </head>
+
+  <body class="print-content">
+    <section class="description">
+      <img class="description-logo" src="./assets/logo.png">
+      <div class="description-title">Data.gov.sg Data Quality Guide</div>
+    </section>
+
+    <div class="site-main" aria-label="Content" >
+      
+<h1 id="contact-us">Contact us</h1>
+
+<p>We will continue to review this Data Quality Guide to ensure that we meet the needs of our users.</p>
+
+<p>We welcome all feedback to improve the quality of data published on <strong><a href="https://data.gov.sg">Data.gov.sg</a></strong>. Raise an issue on Github or drop us an email at feedback@data.gov.sg if you have any comments or queries on the guide.</p>
+
+<h1 id="data-packages">Data Packages</h1>
+
+<p>We adapted this concept from Open Knowledge International’s <a href="http://frictionlessdata.io/data-packages/">Data Package</a> specification, which allows us to package metadata with data files.</p>
+
+<p>We chose to provide metadata in <a href="http://yaml.org/">YAML</a> instead of JSON format, as YAML is both human- and machine-readable.</p>
+
+<p>When users download a dataset from <strong>Data.gov.s<a href=""></a>g</strong>, the zip file contains:</p>
+<ul>
+  <li>A metadata text file (in YAML syntax)</li>
+  <li>The resource file(s)</li>
+</ul>
+
+<h1 id="datagovsg-data-quality-guide-for-tabular-data">Data.gov.sg Data Quality Guide for Tabular Data</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><strong>Data.gov.sg</strong> was launched in 2011 as the Singapore government’s <a href="http://opendatahandbook.org/guide/en/what-is-open-data/">open data</a> portal. To date, 70 government agencies have published data on the portal.</p>
+
+<p>In 2014, we started on a revamp of the site to make our data:</p>
+
+<ol>
+  <li>More relevant to the general public</li>
+  <li>More usable for researchers, developers and other power users.</li>
+</ol>
+
+<p>To meet these requirements, we drafted a new set of <em>data quality standards</em> to ensure <em>all</em> published data can be:</p>
+
+<ol>
+  <li>Visualised in charts and maps</li>
+  <li>Accessible via APIs</li>
+</ol>
+
+<p>The new <strong>Data.gov.s<a href=""></a>g</strong> was launched in October 2015. All published datasets can be accessed via CKAN APIs, and almost all datasets are visualised so users can understand trends at a glance.</p>
+
+<p><strong>All datasets must meet these data quality requirements before publication on Data.gov.sg</strong>.</p>
+
+<h1 id="key-principles">Key Principles</h1>
+
+<h2 id="1-machine-readability">1. Machine Readability</h2>
+<p>Machine-readable data is data in a format that can be understood by a computer. This means that relevant fields can be extracted and parsed by without human input.</p>
+
+<p>Just because a dataset is <em>digitally accessible</em> does not necessarily mean it is <em>machine readable</em> as well (<a href="https://www.data.gov/developers/blog/primer-machine-readability-online-documents-and-data">more on that here</a>).</p>
+
+<p>In the spirit of open data, datasets must be provided in non-proprietary file formats. Tabular data is provided as <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files or in <a href="http://www.json.org/">JSON</a> format.</p>
+
+<p>Metadata must be excluded from data files. They will be included in a zip file with the data file (see the Data Package section below).</p>
+
+<h2 id="2-tidy-data">2. Tidy Data</h2>
+<p>The concept of <em>tidy data</em> is based on <a href="http://vita.had.co.nz/papers/tidy-data.html">this paper</a> by Hadley Wickham, author of popular R packages ggplot2 and plyr.</p>
+
+<p>Hadley proposes three principles:</p>
+
+<ol>
+  <li>
+    <p><strong>Each column is one variable.</strong> This means each column must have the same unit of measurement</p>
+  </li>
+  <li>
+    <p><strong>Each row is one observation.</strong> Note that this does not mean there is only one observed variable per row. There can be multiple observed variables per row: “An observation contains all values measured on the same unit (like a person, or a day, or a race) across attributes.” (Wickham Pg 3)</p>
+  </li>
+  <li>
+    <p><strong>One type of observation unit per table</strong> For example, observations on fertility rates of the whole female population and that females of different age groups should be in two tables:</p>
+    <ul>
+      <li>“Total Fertility Rate”, where observation unit is the entire female population</li>
+      <li>“Total Fertility Rate by Age Group”, where observation unit is female population of different age groups</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="3-consistency">3. Consistency</h2>
+<p>Each variable should be processed and documented in the same way across datasets. Examples include:</p>
+
+<ul>
+  <li>Date formats</li>
+  <li>Null and negligible values</li>
+  <li>Unit of measurement</li>
+</ul>
+
+<p>This makes it easier for users to mashup and use multiple datasets, even from different agencies</p>
+
+<h2 id="4-granularity--precision">4. Granularity &amp; Precision</h2>
+<p>As far as possible, agencies should provide raw, granular data instead of aggregated and process data, such as percentages.</p>
+
+<p>Totals and sub-totals should be in separate tables if needed. For example, there are cases where aggregate numbers (e.g. totals, indices) cannot be derived from granular data points.</p>
+
+<h2 id="5-human-readability">5. Human Readability</h2>
+<p>Lastly, datasets should also be presented in a way that makes sense to human users.</p>
+
+<p>This is why we have created a new set of metadata specifications along with this Data Quality Guide, to ensure that datasets are documented clearly. For instance, each table must be accompanied by a schema, which states the variable type.</p>
+
+<p>Plain language should be used in naming datasets and the elements in them as far as possible. Column names should be descriptive and meaningful. All jargon must be explained clearly, and where necessary, reference links should be provided.</p>
+
+<h1 id="reserved-column-names">Reserved column names</h1>
+
+<p>The following column names should be used only if they adhere to the definitions in this guide:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">year</code></li>
+  <li><code class="language-plaintext highlighter-rouge">half_year</code></li>
+  <li><code class="language-plaintext highlighter-rouge">quarter</code></li>
+  <li><code class="language-plaintext highlighter-rouge">month</code></li>
+  <li><code class="language-plaintext highlighter-rouge">week</code></li>
+  <li><code class="language-plaintext highlighter-rouge">date</code></li>
+  <li><code class="language-plaintext highlighter-rouge">datetime</code></li>
+  <li><code class="language-plaintext highlighter-rouge">time</code></li>
+  <li><code class="language-plaintext highlighter-rouge">financial_year</code></li>
+  <li><code class="language-plaintext highlighter-rouge">financial_half_year</code></li>
+  <li><code class="language-plaintext highlighter-rouge">financial_quarter</code></li>
+  <li><code class="language-plaintext highlighter-rouge">latitude</code></li>
+  <li><code class="language-plaintext highlighter-rouge">longitude</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x_coord</code></li>
+  <li><code class="language-plaintext highlighter-rouge">y_coord</code></li>
+  <li><code class="language-plaintext highlighter-rouge">postal_code</code></li>
+</ul>
+
+<h1 id="structure-for-tabular-data">Structure for Tabular Data</h1>
+
+<h2 id="1-column-headers">1. Column Headers</h2>
+<ul>
+  <li>Only alphanumeric or these 3 special characters: .-_
+    <ul>
+      <li>Ampersand (&amp;) should be replaced by “and” if needed</li>
+    </ul>
+  </li>
+  <li>Each must be unique
+    <ul>
+      <li>Can’t have two headers called “duration”</li>
+    </ul>
+  </li>
+  <li>All headers are in lower case
+    <ul>
+      <li>e.g. “rating”</li>
+    </ul>
+  </li>
+  <li>If header contains more than one word, use underscores to join
+    <ul>
+      <li>e.g. vehicle_type</li>
+    </ul>
+  </li>
+  <li>Units of measure should be omitted</li>
+  <li>Keep short (less than 25 characters)
+    <ul>
+      <li>The full name can be stored in schema section of metadata file</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2-column-order">2. Column Order</h2>
+<ul>
+  <li><em>Date and time variables</em> should always be in the first column for time series data</li>
+  <li><em>Fixed variables</em> should be ordered with the highest-level variable on the left and most granular variable on the right</li>
+  <li><em>Observed variables</em> should always be on the rightmost columns</li>
+</ul>
+
+<h2 id="3-row-order">3. Row Order</h2>
+<ul>
+  <li>Rows should be ordered from the leftmost column to the rightmost one</li>
+  <li>For datetime variables, order chronologically</li>
+  <li>For fixed variables, order alphabetically</li>
+</ul>
+
+<h2 id="4-date-and-time-variables">4. Date and Time Variables</h2>
+<ul>
+  <li>Based on ISO8601, an international standard for representing date and time. We chose the “extended format” with the hyphens because it is humanly more readable.
+    <ul>
+      <li>Compare 2016-01-01 to 20160101</li>
+    </ul>
+  </li>
+  <li>
+    <p>All date and time variables must be in UTC +8hrs unless specified.</p>
+  </li>
+  <li>
+    <p>Date variables:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Interval</th>
+          <th>Column name</th>
+          <th>Format</th>
+          <th>Range of values</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Annual</td>
+          <td><code class="language-plaintext highlighter-rouge">year</code></td>
+          <td>YYYY</td>
+          <td>YYYY: 1900 onwards</td>
+          <td>2015</td>
+        </tr>
+        <tr>
+          <td>Monthly</td>
+          <td><code class="language-plaintext highlighter-rouge">month</code></td>
+          <td>YYYY-MM</td>
+          <td>MM: 01 to 12</td>
+          <td>2015-01</td>
+        </tr>
+        <tr>
+          <td>Daily</td>
+          <td><code class="language-plaintext highlighter-rouge">date</code></td>
+          <td>YYYY-MM-DD</td>
+          <td>DD: 01 to 31</td>
+          <td>2015-01-01</td>
+        </tr>
+        <tr>
+          <td>Weekly</td>
+          <td><code class="language-plaintext highlighter-rouge">week</code></td>
+          <td>YYYY-[W]WW</td>
+          <td>[W]WW: W01 to W52</td>
+          <td>2015-W01</td>
+        </tr>
+        <tr>
+          <td>Quarterly</td>
+          <td><code class="language-plaintext highlighter-rouge">quarter</code></td>
+          <td>YYYY-[Q]Q</td>
+          <td>[Q]Q: Q1 to Q4</td>
+          <td>2015-Q1</td>
+        </tr>
+        <tr>
+          <td>Half-yearly</td>
+          <td><code class="language-plaintext highlighter-rouge">half_year</code></td>
+          <td>YYYY-[H]H</td>
+          <td>[H]H: H1 or H2</td>
+          <td>2015-H1</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>For financial periods, prefix “financial_” to column name:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Interval</th>
+          <th>Column name</th>
+          <th>Format</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Financial, annual</td>
+          <td><code class="language-plaintext highlighter-rouge">financial_year</code></td>
+          <td>YYYY</td>
+          <td>2015</td>
+        </tr>
+        <tr>
+          <td>Financial, quarterly</td>
+          <td><code class="language-plaintext highlighter-rouge">financial_quarter</code></td>
+          <td>YYYY-[Q]Q</td>
+          <td>2015-Q1</td>
+        </tr>
+        <tr>
+          <td>Financial, half-yearly</td>
+          <td><code class="language-plaintext highlighter-rouge">financial_half_year</code></td>
+          <td>YYYY-[H]H</td>
+          <td>2015-H1</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li>Financial year start-date must be indicated in metadata</li>
+    </ul>
+  </li>
+  <li>
+    <p>For date-time variables:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Column name</th>
+          <th>Format</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Date + time</td>
+          <td><code class="language-plaintext highlighter-rouge">date_time</code></td>
+          <td>YYYY-MM-DD[T]hh:mm</td>
+          <td>2015-01-01T12:00</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td><em>or</em> YYYY-MM-DD[T]hh:mm:ss</td>
+          <td>2015-01-01T12:00:00</td>
+        </tr>
+        <tr>
+          <td>Time only</td>
+          <td><code class="language-plaintext highlighter-rouge">time</code></td>
+          <td>hh:mm</td>
+          <td>12:00</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td><em>or</em> hh:mm:ss</td>
+          <td>12:00:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Specify the timezone if it is not UTC +8hrs:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Column name</th>
+          <th>Format</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Date + time</td>
+          <td><code class="language-plaintext highlighter-rouge">date_time</code></td>
+          <td>YYYY-MM-DD[T]hh:mm+hh:mm</td>
+          <td>2015-01-01T12:00+00:00</td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td><em>or</em> YYYY-MM-DD[T]hh:mm:ss+hh:mm:ss</td>
+          <td>2015-01-01T12:00:00+00:00:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="5-textual-variables">5. Textual Variables</h2>
+<ul>
+  <li>UTF-8 encoding should be used
+    <ul>
+      <li>This ensures that special characters such as Chinese characters can be decoded by users</li>
+    </ul>
+  </li>
+  <li>No line breaks within cells</li>
+</ul>
+
+<h2 id="6-numeric-variables">6. Numeric Variables</h2>
+<ul>
+  <li>No commas
+    <ul>
+      <li>E.g. “1000” instead of “1,000”</li>
+    </ul>
+  </li>
+  <li>No units of measurement
+    <ul>
+      <li>Units should be in metadata instead</li>
+    </ul>
+  </li>
+  <li>Express as full number where possible
+    <ul>
+      <li>If rounded, indicate in metadata</li>
+      <li>E.g. “1200000” instead of “1.2” (million)</li>
+    </ul>
+  </li>
+  <li>No rounding if possible
+    <ul>
+      <li>Give raw numbers as far as possible</li>
+      <li>If rounding is needed, try to provide at least 2 decimal places of precision</li>
+    </ul>
+  </li>
+  <li>Percentages can be expressed as either a proportion out of 1 or 100.
+    <ul>
+      <li>E.g.  20% can be expressed as 20 or 0.2</li>
+      <li>The representation of percentages must be consistent throughout each CSV file</li>
+      <li>Agencies must indicate how percentages are expressed in the schema</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="7-location-variables">7. Location variables</h2>
+<ul>
+  <li>Coordinates in EPSG 4326 or EPSG 3414:</li>
+  <li>Should be represented in two columns
+    <ul>
+      <li>EPSG 4326: <code class="language-plaintext highlighter-rouge">latitude</code> and <code class="language-plaintext highlighter-rouge">longitude</code> or</li>
+      <li>EPSG 3414: <code class="language-plaintext highlighter-rouge">x_coord</code> and <code class="language-plaintext highlighter-rouge">y_coord</code></li>
+    </ul>
+  </li>
+  <li>In positive/negative floating point
+    <ul>
+      <li>e.g. <code class="language-plaintext highlighter-rouge">latitude</code>: 1.2896700; <code class="language-plaintext highlighter-rouge">longitude</code>: 103.8500700</li>
+    </ul>
+  </li>
+  <li>EPSG should be indicated in metadata</li>
+  <li>Addresses should be represented in two columns if possible
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">address</code>: e.g. 1 Sims Avenue, Singapore 123456</li>
+      <li><code class="language-plaintext highlighter-rouge">postal_code</code>: e.g. 123456</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="8-nullnegligible-values">8. Null/negligible values</h2>
+<ul>
+  <li>
+    <p>For any variable type:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Value</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>na</td>
+          <td>Datum not available or not applicable</td>
+        </tr>
+        <tr>
+          <td>-</td>
+          <td>Datum is negligible or not significant</td>
+        </tr>
+        <tr>
+          <td>s</td>
+          <td>Datum is suppressed</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>If possible, explain why there are such values in the metadata</p>
+  </li>
+</ul>
+
+
+    </div>
+  </body>
+
+</html>
